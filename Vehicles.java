@@ -4,12 +4,6 @@ public class Vehicles{
       String model;
       int year;
       
-      Vehicles(String brand, String model, int year){
-            this.brand = brand;
-            this.model = model;
-            this.year = year;
-      }
-      
    public void displayInfo(){
          System.out.println(brand + " " + model + " (" + year + ")");
       }
