@@ -4,6 +4,10 @@ public class Main {
         vehicle.displayInfo();
     }
 
+    public static void performService(Serviceable item) {
+        item.service();
+    }
+
     public static void main(String[] args) {
 
         // DEMO 1: A parent reference can refer to a child object.
@@ -15,6 +19,7 @@ public class Main {
         vehicle.moveBackward();
         vehicle.moveLeft();
         vehicle.moveRight();
+        performService((Serviceable) vehicle);
         System.out.println();
 
         // The same variable now refers to a Motorcycle object.
@@ -24,6 +29,7 @@ public class Main {
         vehicle.moveBackward();
         vehicle.moveLeft();
         vehicle.moveRight();
+        performService((Serviceable) vehicle);
         System.out.println();
 
         // DEMO 2: One method accepts different Vehicle subclasses.
@@ -38,18 +44,22 @@ public class Main {
         car.moveBackward();
         car.moveLeft();
         car.moveRight();
+        performService((Serviceable) car);
         System.out.println();
+
         printDetails(motorcycle);
         motorcycle.moveForward();
         motorcycle.moveBackward();
         motorcycle.moveLeft();
         motorcycle.moveRight();
         System.out.println();
+        performService((Serviceable) motorcycle);
         printDetails(truck);
         truck.moveForward();
         truck.moveBackward();
         truck.moveLeft();
         truck.moveRight();
+        performService((Serviceable) truck);
         System.out.print("");
 
         // DEMO 3: One array holds different Vehicle subclasses.
@@ -60,6 +70,17 @@ public class Main {
                 new Motorcycle("Honda", "TMX 125", 2021, "125cc Single-Cylinder"),
                 new Truck("Mitsubishi", "Canter", 2020, 6)
         };
+
+        Serviceable[] serviceables = {
+                new Car("Honda", "City", 2022, 4),
+                new Motorcycle("Honda", "TMX 125", 2021, "125cc Single-Cylinder"),
+                new Truck("Mitsubishi", "Canter", 2020, 6),
+                new Printer()
+        };
+
+        for (Serviceable serviceable : serviceables) {
+            performService(serviceable);
+        }
 
         for (Vehicle currentVehicle : vehicles) {
             printDetails(currentVehicle);
