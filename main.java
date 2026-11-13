@@ -1,61 +1,73 @@
 
 public class Main {
+    public static void printDetails(Vehicle vehicle) {
+        vehicle.displayInfo();
+    }
 
     public static void main(String[] args) {
 
-        
-        Vehicles v1 = new Vehicles("BMW", "3 Series", 2022);
-        Vehicles v2 = new Vehicles("Ford", "Mustang", 1995);
-        Vehicles v3 = new Vehicles("Honda", "Civic", 2020);
+        // DEMO 1: A parent reference can refer to a child object.
+        System.out.println("=== 1. Parent Reference ===");
 
-        
-        v1.displayInfo();
-        System.out.println("Age: " + v1.calculateAge());
-        System.out.println("Is Vintage: " + v1.isVintage());
+        Vehicle vehicle = new Car("Ford", "Mustang", 1967, 4);
+        vehicle.displayInfo();
+        vehicle.moveForward();
+        vehicle.moveBackward();
+        vehicle.moveLeft();
+        vehicle.moveRight();
         System.out.println();
 
-        v2.displayInfo();
-        System.out.println("Age: " + v2.calculateAge());
-        System.out.println("Is Vintage: " + v2.isVintage());
+        // The same variable now refers to a Motorcycle object.
+        vehicle = new Motorcycle("Honda", "Click 125i", 2023, "125cc Single-Cylinder");
+        vehicle.displayInfo();
+        vehicle.moveForward();
+        vehicle.moveBackward();
+        vehicle.moveLeft();
+        vehicle.moveRight();
         System.out.println();
 
-        v3.displayInfo();
-        System.out.println("Age: " + v3.calculateAge());
-        System.out.println("Is Vintage: " + v3.isVintage());
+        // DEMO 2: One method accepts different Vehicle subclasses.
+        System.out.println("\n=== 2. Method Parameter ===");
+
+        Car car = new Car("Mitsubishi", "Mirage G4", 2021, 4);
+        Motorcycle motorcycle = new Motorcycle("Yamaha", "NMAX 155", 2024, "155cc Single-Cylinder");
+        Truck truck = new Truck("Isuzu", "Elf", 2020, 6);
+
+        printDetails(car);
+        car.moveForward();
+        car.moveBackward();
+        car.moveLeft();
+        car.moveRight();
         System.out.println();
-
-        
-        System.out.println("=== Demonstrating Getters (v1) ===");
-        System.out.println("Brand: " + v1.getBrand());
-        System.out.println("Model: " + v1.getModel());
-        System.out.println("Year: " + v1.getYear());
+        printDetails(motorcycle);
+        motorcycle.moveForward();
+        motorcycle.moveBackward();
+        motorcycle.moveLeft();
+        motorcycle.moveRight();
         System.out.println();
+        printDetails(truck);
+        truck.moveForward();
+        truck.moveBackward();
+        truck.moveLeft();
+        truck.moveRight();
+        System.out.print("");
 
-        
-        System.out.println("=== Testing setYear() Behavior ===");
+        // DEMO 3: One array holds different Vehicle subclasses.
+        System.out.println("\n=== 3. Polymorphic Array ===");
 
-        boolean res1 = v1.setYear(2000);
-        System.out.println("setYear(2000) return value: " + res1);
-        System.out.println("Stored Year: " + v1.getYear() + "; Age: " + v1.calculateAge() + "; Vintage: " + v1.isVintage());
-        System.out.println();
+        Vehicle[] vehicles = {
+                new Car("Honda", "City", 2022, 4),
+                new Motorcycle("Honda", "TMX 125", 2021, "125cc Single-Cylinder"),
+                new Truck("Mitsubishi", "Canter", 2020, 6)
+        };
 
-        boolean res2 = v1.setYear(1885);
-        System.out.println("setYear(1885) return value: " + res2);
-        System.out.println("Stored Year: " + v1.getYear());
-        System.out.println();
-
-        boolean res3 = v1.setYear(2027);
-        System.out.println("setYear(2027) return value: " + res3);
-        System.out.println("Stored Year: " + v1.getYear());
-        System.out.println();
-
-        
-        System.out.println("=== Testing Constructor Invalid Year Rules ===");
-
-        Vehicles testV1 = new Vehicles("TestBrand", "TestModel", 1885);
-        System.out.println("New vehicle created with year 1885 -> Initial year stored: " + testV1.getYear());
-
-        Vehicles testV2 = new Vehicles("TestBrand", "TestModel", 2027);
-        System.out.println("New vehicle created with year 2027 -> Initial year stored: " + testV2.getYear());
+        for (Vehicle currentVehicle : vehicles) {
+            printDetails(currentVehicle);
+            currentVehicle.moveForward();
+            currentVehicle.moveBackward();
+            currentVehicle.moveLeft();
+            currentVehicle.moveRight();
+            System.out.println();
+        }
     }
 }
